@@ -4,6 +4,7 @@ class Routes {
   static const String stream = '/dashboard/stream';
 
   static const String settings = '/settings';
+  static const String secretStream = '/settings/secretStream';
 }
 
 class Modules {

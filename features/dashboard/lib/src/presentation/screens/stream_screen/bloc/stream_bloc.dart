@@ -1,6 +1,4 @@
 import 'package:core/core.dart';
-import 'package:dashboard/dashboard.dart';
-
 import 'stream_event.dart';
 import 'stream_state.dart';
 

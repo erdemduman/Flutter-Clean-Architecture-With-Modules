@@ -81,6 +81,11 @@ class InitDependencyInjection {
         c<Logger>(),
       ),
     );
+    Injector.registerFactory(
+      (c) => SecretStreamBloc(
+        c<Logger>(),
+      ),
+    );
     Injector.registerFactory((c) => ThemeBloc(c<Logger>()));
     Injector.registerFactory((c) => LanguageBloc(c<Logger>()));
   }

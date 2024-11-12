@@ -41,6 +41,7 @@ export 'src/presentation/bloc/base_bloc.dart';
 export 'src/presentation/bloc/base_event.dart';
 export 'src/presentation/bloc/base_state.dart';
 export 'src/presentation/bloc/bloc_parameter.dart';
+export 'src/presentation/bloc/websocket_bloc/websocket_bloc.dart';
 
 export 'src/presentation/bloc/theme_bloc/theme_bloc.dart';
 export 'src/presentation/bloc/theme_bloc/theme_event.dart';

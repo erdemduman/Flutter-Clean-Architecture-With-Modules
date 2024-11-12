@@ -94,6 +94,11 @@ class _SettingsScreenBodyState extends State<SettingsScreenBody> {
                   },
                 );
               }),
+              TextButton(
+                  onPressed: () async {
+                    await Navigator.pushNamed(context, Routes.secretStream);
+                  },
+                  child: const Text("Go to secret stream screen"))
             ],
           ),
         );
