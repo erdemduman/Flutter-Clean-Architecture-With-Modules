@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:core/core.dart';
 import 'package:dashboard/dashboard.dart';
 import 'package:settings/settings.dart';
@@ -71,8 +70,6 @@ class InitDependencyInjection {
     Injector.registerFactory(
       (c) => StreamBloc(
         c<GetStoredRandomNumberUseCase>(),
-        c<GetRandomNumberStreamUseCase>(),
-        c<StopNumberGenerationUseCase>(),
         c<Logger>(),
       ),
     );

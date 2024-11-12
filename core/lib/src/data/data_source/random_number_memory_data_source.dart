@@ -1,4 +1,4 @@
-import 'package:dashboard/src/data/model/random_number_model.dart';
+import 'package:core/core.dart';
 
 abstract class RandomNumberMemoryDataSource {
   set randomNumber(RandomNumberModel value);

@@ -1,7 +1,5 @@
 import 'package:core/core.dart';
 
-import '../../../dashboard.dart';
-
 class GetStoredRandomNumberUseCase
     implements UseCase<Future<RandomNumberEntity>> {
   final RandomNumberRepository _randomNumberRepository;

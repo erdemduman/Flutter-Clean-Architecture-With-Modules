@@ -1,5 +1,5 @@
 import 'package:dashboard/dashboard.dart';
-import 'package:dashboard/src/data/model/random_number_model.dart';
+import 'package:core/src/data/mapper/random_number_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

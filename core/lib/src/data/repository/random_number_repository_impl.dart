@@ -1,11 +1,7 @@
 import 'package:core/core.dart';
-import 'package:dashboard/src/data/data_source/random_number_memory_data_source.dart';
-import 'package:dashboard/src/data/data_source/random_number_stream_data_source.dart';
-
-import '../../domain/repository/random_number_repository.dart';
-import '../data_source/random_number_data_source.dart';
-import '../model/random_number_model.dart';
-import '../mapper/random_number_mapper.dart';
+import 'package:core/src/data/data_source/random_number_data_source.dart';
+import 'package:core/src/data/data_source/random_number_memory_data_source.dart';
+import 'package:core/src/data/data_source/random_number_stream_data_source.dart';
 
 class RandomNumberRepositoryImpl implements RandomNumberRepository {
   final RandomNumberDataSource _randomNumberDataSource;
