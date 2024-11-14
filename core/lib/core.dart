@@ -8,6 +8,7 @@ export 'package:collection/collection.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:bloc_concurrency/bloc_concurrency.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
+export 'package:rxdart/rxdart.dart';
 
 // constants
 export 'src/constants/app_constants.dart';
@@ -60,7 +61,6 @@ export 'src/presentation/bloc/base_bloc.dart';
 export 'src/presentation/bloc/base_event.dart';
 export 'src/presentation/bloc/base_state.dart';
 export 'src/presentation/bloc/bloc_parameter.dart';
-export 'src/presentation/bloc/websocket_bloc/websocket_bloc.dart';
 
 export 'src/presentation/bloc/theme_bloc/theme_bloc.dart';
 export 'src/presentation/bloc/theme_bloc/theme_event.dart';
@@ -69,6 +69,10 @@ export 'src/presentation/bloc/theme_bloc/theme_state.dart';
 export 'src/presentation/bloc/language_bloc/language_bloc.dart';
 export 'src/presentation/bloc/language_bloc/language_event.dart';
 export 'src/presentation/bloc/language_bloc/language_state.dart';
+
+export 'src/presentation/bloc/websocket_bloc/websocket_bloc.dart';
+export 'src/presentation/bloc/websocket_bloc/websocket_event.dart';
+export 'src/presentation/bloc/websocket_bloc/websocket_state.dart';
 
 // widgets
 export 'src/presentation/widgets/base_screen.dart';

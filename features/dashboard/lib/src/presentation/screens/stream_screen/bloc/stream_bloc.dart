@@ -29,17 +29,10 @@ class StreamBloc extends BaseBloc<StreamEvent, StreamState> {
   Future<void> _initStreamBloc(
     InitStreamBlocEvent event,
     Emitter<StreamState> emit,
-  ) async {
-    RandomNumberEntity entity = await _getStoredRandomNumberUseCase(
-      parameter: UseCaseNoParameter(),
-    );
-    emit(state.copyWith(number: entity.number.toString()));
-  }
+  ) async {}
 
   void _disposeStreamBloc(
     DisposeStreamBlocEvent event,
     Emitter<StreamState> emit,
-  ) {
-    emit(state.copyWith(isRunning: false));
-  }
+  ) {}
 }

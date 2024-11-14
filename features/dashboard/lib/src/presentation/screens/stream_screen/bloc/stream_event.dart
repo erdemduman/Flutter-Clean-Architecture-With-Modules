@@ -11,19 +11,6 @@ class InitStreamBlocEvent extends StreamEvent {
   List<Object?> get props => [];
 }
 
-class FetchNumberStreamEvent extends StreamEvent {
-  final int maxLimit;
-  final bool isRunning;
-
-  const FetchNumberStreamEvent({
-    required this.maxLimit,
-    required this.isRunning,
-  });
-
-  @override
-  List<Object?> get props => [maxLimit, isRunning];
-}
-
 class DisposeStreamBlocEvent extends StreamEvent {
   const DisposeStreamBlocEvent();
 

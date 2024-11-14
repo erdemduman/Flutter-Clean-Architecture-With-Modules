@@ -85,5 +85,12 @@ class InitDependencyInjection {
     );
     Injector.registerFactory((c) => ThemeBloc(c<Logger>()));
     Injector.registerFactory((c) => LanguageBloc(c<Logger>()));
+    Injector.registerFactory(
+      (c) => WebsocketBloc(
+        c<GetRandomNumberStreamUseCase>(),
+        c<StopNumberGenerationUseCase>(),
+        c<Logger>(),
+      ),
+    );
   }
 }

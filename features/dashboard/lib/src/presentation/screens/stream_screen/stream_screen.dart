@@ -34,6 +34,7 @@ class StreamScreenBody extends StatefulWidget {
 
 class _StreamScreenBodyState extends State<StreamScreenBody> {
   StreamBloc? _bloc;
+  WebsocketBloc? _websocketBloc;
   int _maxLimit = 25;
   DisabledButton _disabledButton = DisabledButton.max25;
 
@@ -41,6 +42,7 @@ class _StreamScreenBodyState extends State<StreamScreenBody> {
   void initState() {
     super.initState();
     _bloc = BaseScreen.of<StreamBloc>(context);
+    _websocketBloc = SharedBlocProvider.of<WebsocketBloc>(context);
   }
 
   @override
@@ -70,86 +72,65 @@ class _StreamScreenBodyState extends State<StreamScreenBody> {
         ],
       ),
       body: Center(
-        child: BlocBuilder<StreamBloc, StreamState>(builder: (context, state) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text("${context.strId.max_limit}: $_maxLimit"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButton(
-                      onPressed: _disabledButton != DisabledButton.max25
-                          ? () {
-                              setState(() {
-                                _maxLimit = 25;
-                                _disabledButton = DisabledButton.max25;
-                              });
-                              if (state.isRunning) {
-                                _bloc?.add(
-                                  FetchNumberStreamEvent(
-                                    maxLimit: _maxLimit,
-                                    isRunning: true,
-                                  ),
-                                );
+        child: BlocBuilder<WebsocketBloc, WebsocketState>(
+            builder: (context, websocketState) {
+          return BlocBuilder<StreamBloc, StreamState>(
+              builder: (context, state) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text("${context.strId.max_limit}: $_maxLimit"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                        onPressed: _disabledButton != DisabledButton.max25
+                            ? () {
+                                setState(() {
+                                  _maxLimit = 25;
+                                  _disabledButton = DisabledButton.max25;
+                                });
                               }
-                            }
-                          : null,
-                      child: const Text('25')),
-                  TextButton(
-                      onPressed: _disabledButton != DisabledButton.max50
-                          ? () {
-                              setState(() {
-                                _maxLimit = 50;
-                                _disabledButton = DisabledButton.max50;
-                              });
-                              if (state.isRunning) {
-                                _bloc?.add(
-                                  FetchNumberStreamEvent(
-                                    maxLimit: _maxLimit,
-                                    isRunning: true,
-                                  ),
-                                );
+                            : null,
+                        child: const Text('25')),
+                    TextButton(
+                        onPressed: _disabledButton != DisabledButton.max50
+                            ? () {
+                                setState(() {
+                                  _maxLimit = 50;
+                                  _disabledButton = DisabledButton.max50;
+                                });
                               }
-                            }
-                          : null,
-                      child: const Text('50')),
-                  TextButton(
-                      onPressed: _disabledButton != DisabledButton.max100
-                          ? () {
-                              setState(() {
-                                _maxLimit = 100;
-                                _disabledButton = DisabledButton.max100;
-                              });
-                              if (state.isRunning) {
-                                _bloc?.add(
-                                  FetchNumberStreamEvent(
-                                    maxLimit: _maxLimit,
-                                    isRunning: true,
-                                  ),
-                                );
+                            : null,
+                        child: const Text('50')),
+                    TextButton(
+                        onPressed: _disabledButton != DisabledButton.max100
+                            ? () {
+                                setState(() {
+                                  _maxLimit = 100;
+                                  _disabledButton = DisabledButton.max100;
+                                });
                               }
-                            }
-                          : null,
-                      child: const Text('100')),
-                ],
-              ),
-              Text(state.number),
-              TextButton(
-                onPressed: () {
-                  _bloc?.add(FetchNumberStreamEvent(
-                    maxLimit: _maxLimit,
-                    isRunning: !state.isRunning,
-                  ));
-                },
-                child: Text(
-                  !state.isRunning
-                      ? context.strId.fetch_number_stream
-                      : context.strId.stop_stream,
+                            : null,
+                        child: const Text('100')),
+                  ],
                 ),
-              ),
-            ],
-          );
+                StreamBuilder<String>(
+                    stream: _websocketBloc?.numberStream,
+                    builder: (context, snapshot) {
+                      return Text(snapshot.data ?? "23");
+                    }),
+                TextButton(
+                  onPressed: () {
+                    _websocketBloc?.add(FetchNumberStreamEvent(
+                      maxLimit: _maxLimit,
+                    ));
+                  },
+                  child: const Text("TEXT"),
+                ),
+              ],
+            );
+          });
         }),
       ),
     );

@@ -36,7 +36,7 @@ class RandomNumberRepositoryImpl implements RandomNumberRepository {
       yield* modelStream.map((numberModel) {
         _memory.randomNumber = numberModel;
         return RandomNumberMapper(numberModel).toEntity();
-      });
+      }).asBroadcastStream();
     } on RandomNumberException catch (_) {
       rethrow;
     }

@@ -9,13 +9,18 @@ abstract class WebsocketEvent extends BaseEvent {
 
 class FetchNumberStreamEvent extends WebsocketEvent {
   final int maxLimit;
-  final bool isRunning;
 
   const FetchNumberStreamEvent({
     required this.maxLimit,
-    required this.isRunning,
   });
 
   @override
-  List<Object?> get props => [maxLimit, isRunning];
+  List<Object?> get props => [maxLimit];
+}
+
+class StopNumberStreamEvent extends WebsocketEvent {
+  const StopNumberStreamEvent();
+
+  @override
+  List<Object?> get props => [];
 }
