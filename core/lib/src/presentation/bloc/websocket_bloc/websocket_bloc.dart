@@ -60,7 +60,6 @@ class WebsocketBloc extends BaseBloc<WebsocketEvent, WebsocketState> {
   ) async {
     await _currentSubscription?.cancel();
     _stopNumberGenerationUseCase(parameter: UseCaseNoParameter());
-    _numberStreamController.close();
   }
 
   @override
