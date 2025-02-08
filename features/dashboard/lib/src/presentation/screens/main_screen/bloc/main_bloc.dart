@@ -7,14 +7,4 @@ class MainBloc extends BaseBloc<MainEvent, MainState> {
   final Logger _logger;
 
   MainBloc(this._logger) : super(MainState.create());
-
-  @override
-  void init({required BlocParameter parameter}) {
-    _logger.d("Init");
-  }
-
-  @override
-  void dispose() {
-    _logger.d("Dispose");
-  }
 }

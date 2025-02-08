@@ -16,17 +16,8 @@ class NumberBloc extends BaseBloc<NumberEvent, NumberState> {
   ) : super(NumberState.create()) {
     on<InitNumberBlocEvent>(_initNumberBloc);
     on<FetchNumberEvent>(_fetchNumber);
-  }
 
-  @override
-  void init({required BlocParameter parameter}) {
-    _logger.d("Init");
     add(const InitNumberBlocEvent());
-  }
-
-  @override
-  void dispose() {
-    _logger.d("Dispose");
   }
 
   void _initNumberBloc(

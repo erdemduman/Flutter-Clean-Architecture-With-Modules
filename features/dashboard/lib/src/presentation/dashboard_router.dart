@@ -11,20 +11,11 @@ class DashboardRouter with RouteMixin implements Routable {
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.main:
-        return getScreen(
-          const MainScreen(parameter: BlocNoParameter()),
-          settings,
-        );
+        return getScreen(const MainScreen(), settings);
       case Routes.number:
-        return getScreen(
-          const NumberScreen(parameter: BlocNoParameter()),
-          settings,
-        );
+        return getScreen(const NumberScreen(), settings);
       case Routes.stream:
-        return getScreen(
-          const StreamScreen(parameter: BlocNoParameter()),
-          settings,
-        );
+        return getScreen(const StreamScreen(), settings);
       default:
         return getScreen(
           const Center(

@@ -3,9 +3,7 @@ import 'package:dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
-  final BlocNoParameter parameter;
-
-  const MainScreen({super.key, required this.parameter});
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -14,9 +12,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(
-      bloc: Injector.resolve<MainBloc>(),
-      parameter: widget.parameter,
+    return BlocProvider(
+      create: (context) => Injector.resolve<MainBloc>(),
       child: const MainScreenBody(),
     );
   }
@@ -38,12 +35,7 @@ class _MainScreenBodyState extends State<MainScreenBody> {
         actions: [
           IconButton(
             onPressed: () async {
-              await Navigator.pushNamed(
-                context,
-                Routes.settings,
-                arguments:
-                    const SettingsBlocParameter(previousPage: "Main Screen"),
-              );
+              await Navigator.pushNamed(context, Routes.settings);
             },
             icon: const Icon(Icons.settings),
           )

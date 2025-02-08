@@ -5,9 +5,7 @@ import 'package:settings/src/presentation/settings_screen/bloc/settings_state.da
 import 'bloc/settings_bloc.dart';
 
 class SettingsScreen extends StatefulWidget {
-  final SettingsBlocParameter parameter;
-
-  const SettingsScreen({super.key, required this.parameter});
+  const SettingsScreen({super.key});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -16,9 +14,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(
-      bloc: Injector.resolve<SettingsBloc>(),
-      parameter: widget.parameter,
+    return BlocProvider(
+      create: (context) => Injector.resolve<SettingsBloc>(),
       child: const SettingsScreenBody(),
     );
   }
@@ -32,16 +29,6 @@ class SettingsScreenBody extends StatefulWidget {
 }
 
 class _SettingsScreenBodyState extends State<SettingsScreenBody> {
-  ThemeBloc? _themeBloc;
-  LanguageBloc? _languageBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    _themeBloc = SharedBlocProvider.of<ThemeBloc>(context);
-    _languageBloc = SharedBlocProvider.of<LanguageBloc>(context);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +46,6 @@ class _SettingsScreenBodyState extends State<SettingsScreenBody> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text("${context.strId.previous_screen}: ${state.previousScreen}"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -68,7 +54,7 @@ class _SettingsScreenBodyState extends State<SettingsScreenBody> {
                     builder: (context, themeState) => Switch(
                       value: themeState.isDarkTheme,
                       onChanged: (_) {
-                        _themeBloc?.add(ToggleThemeEvent());
+                        context.read<ThemeBloc>().add(ToggleThemeEvent());
                       },
                     ),
                   ),
@@ -88,9 +74,9 @@ class _SettingsScreenBodyState extends State<SettingsScreenBody> {
                       )
                       .toList(),
                   onChanged: (lang) {
-                    _languageBloc?.add(
-                      ChangeLanguageEvent(language: lang ?? ""),
-                    );
+                    context.read<LanguageBloc>().add(
+                          ChangeLanguageEvent(language: lang ?? ""),
+                        );
                   },
                 );
               }),

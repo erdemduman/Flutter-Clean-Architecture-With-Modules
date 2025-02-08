@@ -5,10 +5,8 @@ abstract class SettingsEvent extends BaseEvent {
 }
 
 class InitSettingsBlocEvent extends SettingsEvent {
-  final String previousScreen;
-
-  const InitSettingsBlocEvent({required this.previousScreen});
+  const InitSettingsBlocEvent();
 
   @override
-  List<Object?> get props => [previousScreen];
+  List<Object?> get props => [];
 }

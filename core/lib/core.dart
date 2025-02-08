@@ -40,7 +40,6 @@ export 'src/domain/use_case/use_case_parameter.dart';
 export 'src/presentation/bloc/base_bloc.dart';
 export 'src/presentation/bloc/base_event.dart';
 export 'src/presentation/bloc/base_state.dart';
-export 'src/presentation/bloc/bloc_parameter.dart';
 
 export 'src/presentation/bloc/theme_bloc/theme_bloc.dart';
 export 'src/presentation/bloc/theme_bloc/theme_event.dart';
@@ -51,7 +50,5 @@ export 'src/presentation/bloc/language_bloc/language_event.dart';
 export 'src/presentation/bloc/language_bloc/language_state.dart';
 
 // widgets
-export 'src/presentation/widgets/base_screen.dart';
-export 'src/presentation/widgets/parameter/settings_bloc_parameter.dart';
 export 'src/presentation/widgets/shared_bloc_provider.dart';
 export 'src/presentation/widgets/build_context_extension.dart';

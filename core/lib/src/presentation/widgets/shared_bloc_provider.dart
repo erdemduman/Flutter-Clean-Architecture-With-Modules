@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../di/injector.dart';
 import '../bloc/base_bloc.dart';
-import '../bloc/bloc_parameter.dart';
 import '../bloc/theme_bloc/theme_bloc.dart';
 
 class SharedBlocProvider extends StatefulWidget {
@@ -39,9 +38,6 @@ class _SharedBlocProviderPocState extends State<SharedBlocProvider>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-
-    widget.themeBloc.init(parameter: const BlocNoParameter());
-    widget.languageBloc.init(parameter: const BlocNoParameter());
   }
 
   @override
@@ -57,10 +53,7 @@ class _SharedBlocProviderPocState extends State<SharedBlocProvider>
 
   @override
   void dispose() {
-    widget.themeBloc.dispose();
     widget.themeBloc.close();
-
-    widget.languageBloc.dispose();
     widget.languageBloc.close();
 
     WidgetsBinding.instance.removeObserver(this);

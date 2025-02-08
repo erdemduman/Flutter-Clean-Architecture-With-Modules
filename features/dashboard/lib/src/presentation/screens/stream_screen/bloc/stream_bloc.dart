@@ -18,19 +18,8 @@ class StreamBloc extends BaseBloc<StreamEvent, StreamState> {
   ) : super(StreamState.create()) {
     on<InitStreamBlocEvent>(_initStreamBloc);
     on<FetchNumberStreamEvent>(_fetchNumberStream, transformer: restartable());
-    on<DisposeStreamBlocEvent>(_disposeStreamBloc);
-  }
 
-  @override
-  void init({required BlocParameter parameter}) {
-    _logger.d("Init");
     add(const InitStreamBlocEvent());
-  }
-
-  @override
-  void dispose() {
-    _logger.d("Dispose");
-    add(const DisposeStreamBlocEvent());
   }
 
   Future<void> _initStreamBloc(
@@ -72,9 +61,12 @@ class StreamBloc extends BaseBloc<StreamEvent, StreamState> {
     }
   }
 
-  void _disposeStreamBloc(
-      DisposeStreamBlocEvent event, Emitter<StreamState> emit) {
-    _stopNumberGenerationUseCase(parameter: UseCaseNoParameter());
-    emit(state.copyWith(isRunning: false));
+  @override
+  Future<void> close() {
+    _logger.d("Closing StreamBloc...");
+    _stopNumberGenerationUseCase(
+      parameter: UseCaseNoParameter(),
+    );
+    return super.close();
   }
 }

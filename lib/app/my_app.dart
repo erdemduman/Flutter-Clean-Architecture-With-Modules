@@ -7,7 +7,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SharedBlocProvider(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => Injector.resolve<ThemeBloc>()),
+        BlocProvider(create: (context) => Injector.resolve<LanguageBloc>()),
+      ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, themeState) =>
             BlocBuilder<LanguageBloc, LanguageState>(

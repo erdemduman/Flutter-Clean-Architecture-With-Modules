@@ -6,9 +6,7 @@ import 'bloc/stream_event.dart';
 import 'bloc/stream_state.dart';
 
 class StreamScreen extends StatefulWidget {
-  final BlocNoParameter parameter;
-
-  const StreamScreen({super.key, required this.parameter});
+  const StreamScreen({super.key});
 
   @override
   State<StreamScreen> createState() => _StreamScreenState();
@@ -17,9 +15,8 @@ class StreamScreen extends StatefulWidget {
 class _StreamScreenState extends State<StreamScreen> {
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(
-      bloc: Injector.container<StreamBloc>(),
-      parameter: widget.parameter,
+    return BlocProvider(
+      create: (context) => Injector.container<StreamBloc>(),
       child: const StreamScreenBody(),
     );
   }
@@ -33,15 +30,8 @@ class StreamScreenBody extends StatefulWidget {
 }
 
 class _StreamScreenBodyState extends State<StreamScreenBody> {
-  StreamBloc? _bloc;
   int _maxLimit = 25;
   DisabledButton _disabledButton = DisabledButton.max25;
-
-  @override
-  void initState() {
-    super.initState();
-    _bloc = BaseScreen.of<StreamBloc>(context);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +47,7 @@ class _StreamScreenBodyState extends State<StreamScreenBody> {
         actions: [
           IconButton(
             onPressed: () async {
-              await Navigator.pushNamed(
-                context,
-                Routes.settings,
-                arguments: const SettingsBlocParameter(
-                  previousPage: "Stream Screen",
-                ),
-              );
+              await Navigator.pushNamed(context, Routes.settings);
             },
             icon: const Icon(Icons.settings),
           )
@@ -86,12 +70,12 @@ class _StreamScreenBodyState extends State<StreamScreenBody> {
                                 _disabledButton = DisabledButton.max25;
                               });
                               if (state.isRunning) {
-                                _bloc?.add(
-                                  FetchNumberStreamEvent(
-                                    maxLimit: _maxLimit,
-                                    isRunning: true,
-                                  ),
-                                );
+                                context.read<StreamBloc>().add(
+                                      FetchNumberStreamEvent(
+                                        maxLimit: _maxLimit,
+                                        isRunning: true,
+                                      ),
+                                    );
                               }
                             }
                           : null,
@@ -104,12 +88,12 @@ class _StreamScreenBodyState extends State<StreamScreenBody> {
                                 _disabledButton = DisabledButton.max50;
                               });
                               if (state.isRunning) {
-                                _bloc?.add(
-                                  FetchNumberStreamEvent(
-                                    maxLimit: _maxLimit,
-                                    isRunning: true,
-                                  ),
-                                );
+                                context.read<StreamBloc>().add(
+                                      FetchNumberStreamEvent(
+                                        maxLimit: _maxLimit,
+                                        isRunning: true,
+                                      ),
+                                    );
                               }
                             }
                           : null,
@@ -122,12 +106,12 @@ class _StreamScreenBodyState extends State<StreamScreenBody> {
                                 _disabledButton = DisabledButton.max100;
                               });
                               if (state.isRunning) {
-                                _bloc?.add(
-                                  FetchNumberStreamEvent(
-                                    maxLimit: _maxLimit,
-                                    isRunning: true,
-                                  ),
-                                );
+                                context.read<StreamBloc>().add(
+                                      FetchNumberStreamEvent(
+                                        maxLimit: _maxLimit,
+                                        isRunning: true,
+                                      ),
+                                    );
                               }
                             }
                           : null,
@@ -137,10 +121,10 @@ class _StreamScreenBodyState extends State<StreamScreenBody> {
               Text(state.number),
               TextButton(
                 onPressed: () {
-                  _bloc?.add(FetchNumberStreamEvent(
-                    maxLimit: _maxLimit,
-                    isRunning: !state.isRunning,
-                  ));
+                  context.read<StreamBloc>().add(FetchNumberStreamEvent(
+                        maxLimit: _maxLimit,
+                        isRunning: !state.isRunning,
+                      ));
                 },
                 child: Text(
                   !state.isRunning

@@ -6,9 +6,7 @@ import 'bloc/number_event.dart';
 import 'bloc/number_state.dart';
 
 class NumberScreen extends StatefulWidget {
-  final BlocNoParameter parameter;
-
-  const NumberScreen({super.key, required this.parameter});
+  const NumberScreen({super.key});
 
   @override
   State<NumberScreen> createState() => _NumberScreenState();
@@ -17,9 +15,8 @@ class NumberScreen extends StatefulWidget {
 class _NumberScreenState extends State<NumberScreen> {
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(
-      bloc: Injector.resolve<NumberBloc>(),
-      parameter: widget.parameter,
+    return BlocProvider(
+      create: (context) => Injector.resolve<NumberBloc>(),
       child: const NumberScreenBody(),
     );
   }
@@ -33,15 +30,8 @@ class NumberScreenBody extends StatefulWidget {
 }
 
 class _NumberScreenBodyState extends State<NumberScreenBody> {
-  NumberBloc? _bloc;
   int _maxLimit = 25;
   DisabledButton _disabledButton = DisabledButton.max25;
-
-  @override
-  void initState() {
-    super.initState();
-    _bloc = BaseScreen.of<NumberBloc>(context);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +47,7 @@ class _NumberScreenBodyState extends State<NumberScreenBody> {
         actions: [
           IconButton(
             onPressed: () async {
-              await Navigator.pushNamed(
-                context,
-                Routes.settings,
-                arguments: const SettingsBlocParameter(
-                  previousPage: "Number Screen",
-                ),
-              );
+              await Navigator.pushNamed(context, Routes.settings);
             },
             icon: const Icon(Icons.settings),
           )
@@ -114,7 +98,9 @@ class _NumberScreenBodyState extends State<NumberScreenBody> {
                 Text(state.number),
                 TextButton(
                   onPressed: () {
-                    _bloc?.add(FetchNumberEvent(maxLimit: _maxLimit));
+                    context
+                        .read<NumberBloc>()
+                        .add(FetchNumberEvent(maxLimit: _maxLimit));
                   },
                   child: Text(context.strId.fetch_number),
                 ),
