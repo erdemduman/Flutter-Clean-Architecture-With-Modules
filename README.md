@@ -1,4 +1,4 @@
-# Flutter Modular Clean Architecture
+# Flutter Modular Clean Architecture (UNIT TESTS WILL BE UPDATED!)
 
 This is an example base project for Flutter developers who would like to use multiple packages/modules with clean architecture in their project.
 
